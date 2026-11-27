@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
+from app.api.v1.router import api_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -42,3 +43,7 @@ def health_check():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "version": "0.1.0"
     }
+
+
+# Include V1 API Router
+app.include_router(api_router, prefix=settings.API_V1_STR)
