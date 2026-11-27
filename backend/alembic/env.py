@@ -23,8 +23,9 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Set database connection URL dynamically from Pydantic settings if not explicitly provided
-if not config.get_main_option("sqlalchemy.url"):
+# Set database connection URL dynamically from Pydantic settings
+current_url = config.get_main_option("sqlalchemy.url")
+if not current_url or "driver://" in current_url:
     config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 # Model's MetaData object for 'autogenerate' support

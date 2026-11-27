@@ -131,3 +131,30 @@ export async function apiRequest<T>(
 
   return data as T;
 }
+
+export const api = {
+  get: <T>(endpoint: string, options?: RequestInit) =>
+    apiRequest<T>(endpoint, { ...options, method: 'GET' }).then((data) => ({ data })),
+  post: <T>(endpoint: string, body?: unknown, options?: RequestInit) =>
+    apiRequest<T>(endpoint, {
+      ...options,
+      method: 'POST',
+      body: body ? JSON.stringify(body) : undefined,
+    }).then((data) => ({ data })),
+  patch: <T>(endpoint: string, body?: unknown, options?: RequestInit) =>
+    apiRequest<T>(endpoint, {
+      ...options,
+      method: 'PATCH',
+      body: body ? JSON.stringify(body) : undefined,
+    }).then((data) => ({ data })),
+  put: <T>(endpoint: string, body?: unknown, options?: RequestInit) =>
+    apiRequest<T>(endpoint, {
+      ...options,
+      method: 'PUT',
+      body: body ? JSON.stringify(body) : undefined,
+    }).then((data) => ({ data })),
+  delete: <T>(endpoint: string, options?: RequestInit) =>
+    apiRequest<T>(endpoint, { ...options, method: 'DELETE' }).then((data) => ({ data })),
+};
+
+export default api;

@@ -7,6 +7,9 @@ import { LoginPage } from './pages/LoginPage';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { SupervisorDashboard } from './pages/supervisor/SupervisorDashboard';
 import { WorkerDashboard } from './pages/worker/WorkerDashboard';
+import { SurveyListPage } from './pages/admin/SurveyListPage';
+import { SurveyBuilderPage } from './pages/admin/SurveyBuilderPage';
+import { PublicSurveyPage } from './pages/public/PublicSurveyPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { Loader2 } from 'lucide-react';
 
@@ -50,6 +53,33 @@ export default function App() {
       <Routes>
         {/* Public Login Route */}
         <Route path="/login" element={<LoginPage />} />
+
+        {/* Public Respondent Survey Route */}
+        <Route path="/s/:slug" element={<PublicSurveyPage />} />
+
+        {/* Surveys List Route (Admin & Supervisor) */}
+        <Route
+          path="/admin/surveys"
+          element={
+            <ProtectedRoute allowedRoles={['ADMIN', 'SUPERVISOR']}>
+              <Layout>
+                <SurveyListPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Survey Builder Route (Admin Only) */}
+        <Route
+          path="/admin/surveys/:surveyId/builder"
+          element={
+            <ProtectedRoute allowedRoles={['ADMIN']}>
+              <Layout>
+                <SurveyBuilderPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
 
         {/* Admin Portal */}
         <Route

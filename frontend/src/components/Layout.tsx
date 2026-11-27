@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck } from 'lucide-react';
+import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck, FileText } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -71,6 +71,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Dashboard
               </Link>
+
+              {(user?.role?.name === 'ADMIN' || user?.role?.name === 'SUPERVISOR') && (
+                <Link
+                  to="/admin/surveys"
+                  className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                >
+                  <FileText className="w-4 h-4 mr-1.5" />
+                  Surveys
+                </Link>
+              )}
 
               {user?.role?.name === 'ADMIN' && (
                 <>
