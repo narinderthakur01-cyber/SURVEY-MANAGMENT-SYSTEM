@@ -489,6 +489,11 @@ class TaskService:
         task.completed_at = now
         task.survey_response_data = complete_in.survey_response_data
         task.completion_notes = complete_in.completion_notes.strip() if complete_in.completion_notes else None
+
+        # Auto-terminate active tracking sessions upon task completion
+        from app.services.tracking_service import TrackingService
+        TrackingService.terminate_sessions_for_task(db, task.id, "TASK_COMPLETED")
+
         db.commit()
         return TaskService.get_task(db, task.id, current_user)
 
@@ -514,6 +519,11 @@ class TaskService:
 
         task.status = TaskStatus.CANCELLED.value
         task.cancelled_at = datetime.now(timezone.utc)
+
+        # Auto-terminate active tracking sessions upon task cancellation
+        from app.services.tracking_service import TrackingService
+        TrackingService.terminate_sessions_for_task(db, task.id, "TASK_CANCELLED")
+
         db.commit()
         return TaskService.get_task(db, task.id, current_user)
 

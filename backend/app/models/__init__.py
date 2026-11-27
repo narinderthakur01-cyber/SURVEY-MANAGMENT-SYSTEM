@@ -21,6 +21,11 @@ from app.models.task import (
     TaskStatus,
     TaskPriority,
 )
+from app.models.tracking import (
+    TrackingSession,
+    WorkerLocation,
+    TrackingSessionStatus,
+)
 
 __all__ = [
     "Role",
@@ -42,4 +47,7 @@ __all__ = [
     "TaskIssue",
     "TaskStatus",
     "TaskPriority",
+    "TrackingSession",
+    "WorkerLocation",
+    "TrackingSessionStatus",
 ]

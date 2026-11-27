@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_EMAIL: str = "admin@survey.org"
     FIRST_SUPERUSER_PASSWORD: str = "ChangeThisPassword123!"
 
+    # Phase 5 Tracking Configuration
+    LOCATION_RETENTION_DAYS: int = 30
+    MIN_LOCATION_UPDATE_INTERVAL_SECONDS: int = 5
+
     model_config = SettingsConfigDict(
         env_file=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), ".env"),
         env_file_encoding="utf-8",

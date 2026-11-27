@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck, FileText, ClipboardList } from 'lucide-react';
+import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck, FileText, ClipboardList, Navigation } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -87,6 +87,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   >
                     <ClipboardList className="w-4 h-4 mr-1.5" />
                     Tasks
+                  </Link>
+                  <Link
+                    to={user?.role?.name === 'ADMIN' ? '/admin/tracking' : '/supervisor/tracking'}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                  >
+                    <Navigation className="w-4 h-4 mr-1.5 text-sky-600" />
+                    Live Tracking
                   </Link>
                 </>
               )}

@@ -4,6 +4,7 @@ import api from '../../lib/api';
 import { Task } from '../../types/task';
 import { SurveyVersion } from '../../types/survey';
 import { SurveyRunner } from '../../components/survey/SurveyRunner';
+import { WorkerLocationTracker } from '../../components/tracking/WorkerLocationTracker';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -179,6 +180,13 @@ export const TaskExecutionPage: React.FC = () => {
           </p>
         )}
       </div>
+
+      {/* Live Workforce Location Tracker */}
+      <WorkerLocationTracker
+        taskId={task.id}
+        taskTitle={task.title}
+        taskStatus={task.status}
+      />
 
       {/* Survey Runner Embed */}
       <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">

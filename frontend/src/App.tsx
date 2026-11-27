@@ -9,6 +9,7 @@ import { SupervisorDashboard } from './pages/supervisor/SupervisorDashboard';
 import { SurveyListPage } from './pages/admin/SurveyListPage';
 import { SurveyBuilderPage } from './pages/admin/SurveyBuilderPage';
 import { AdminTaskManagementPage } from './pages/admin/AdminTaskManagementPage';
+import { LiveTrackingPage } from './pages/admin/LiveTrackingPage';
 import { WorkerTaskDashboard } from './pages/worker/WorkerTaskDashboard';
 import { TaskExecutionPage } from './pages/worker/TaskExecutionPage';
 import { PublicSurveyPage } from './pages/public/PublicSurveyPage';
@@ -100,6 +101,28 @@ export default function App() {
             <ProtectedRoute allowedRoles={['SUPERVISOR', 'ADMIN']}>
               <Layout>
                 <AdminTaskManagementPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Live Tracking Map (Admin & Supervisor) */}
+        <Route
+          path="/admin/tracking"
+          element={
+            <ProtectedRoute allowedRoles={['ADMIN', 'SUPERVISOR']}>
+              <Layout>
+                <LiveTrackingPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/supervisor/tracking"
+          element={
+            <ProtectedRoute allowedRoles={['SUPERVISOR', 'ADMIN']}>
+              <Layout>
+                <LiveTrackingPage />
               </Layout>
             </ProtectedRoute>
           }
