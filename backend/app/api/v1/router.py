@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, users, teams, roles, surveys
+from app.api.v1.endpoints import auth, users, teams, roles, surveys, tasks
 
 api_router = APIRouter()
 
@@ -8,3 +8,4 @@ api_router.include_router(users.router)
 api_router.include_router(teams.router)
 api_router.include_router(roles.router)
 api_router.include_router(surveys.router)
+api_router.include_router(tasks.router)

@@ -6,9 +6,11 @@ import { Layout } from './components/Layout';
 import { LoginPage } from './pages/LoginPage';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { SupervisorDashboard } from './pages/supervisor/SupervisorDashboard';
-import { WorkerDashboard } from './pages/worker/WorkerDashboard';
 import { SurveyListPage } from './pages/admin/SurveyListPage';
 import { SurveyBuilderPage } from './pages/admin/SurveyBuilderPage';
+import { AdminTaskManagementPage } from './pages/admin/AdminTaskManagementPage';
+import { WorkerTaskDashboard } from './pages/worker/WorkerTaskDashboard';
+import { TaskExecutionPage } from './pages/worker/TaskExecutionPage';
 import { PublicSurveyPage } from './pages/public/PublicSurveyPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { Loader2 } from 'lucide-react';
@@ -81,6 +83,50 @@ export default function App() {
           }
         />
 
+        {/* Tasks Management Route (Admin & Supervisor) */}
+        <Route
+          path="/admin/tasks"
+          element={
+            <ProtectedRoute allowedRoles={['ADMIN', 'SUPERVISOR']}>
+              <Layout>
+                <AdminTaskManagementPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/supervisor/tasks"
+          element={
+            <ProtectedRoute allowedRoles={['SUPERVISOR', 'ADMIN']}>
+              <Layout>
+                <AdminTaskManagementPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Worker Tasks Portal & Survey Execution */}
+        <Route
+          path="/worker/tasks"
+          element={
+            <ProtectedRoute allowedRoles={['WORKER', 'SUPERVISOR', 'ADMIN']}>
+              <Layout>
+                <WorkerTaskDashboard />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/worker/tasks/:taskId/execute"
+          element={
+            <ProtectedRoute allowedRoles={['WORKER', 'SUPERVISOR', 'ADMIN']}>
+              <Layout>
+                <TaskExecutionPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
         {/* Admin Portal */}
         <Route
           path="/admin"
@@ -111,7 +157,7 @@ export default function App() {
           element={
             <ProtectedRoute allowedRoles={['WORKER', 'SUPERVISOR', 'ADMIN']}>
               <Layout>
-                <WorkerDashboard />
+                <WorkerTaskDashboard />
               </Layout>
             </ProtectedRoute>
           }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck, FileText } from 'lucide-react';
+import { Activity, LogOut, User as UserIcon, Shield, Users, ClipboardCheck, FileText, ClipboardList } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -73,13 +73,22 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
 
               {(user?.role?.name === 'ADMIN' || user?.role?.name === 'SUPERVISOR') && (
-                <Link
-                  to="/admin/surveys"
-                  className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
-                >
-                  <FileText className="w-4 h-4 mr-1.5" />
-                  Surveys
-                </Link>
+                <>
+                  <Link
+                    to="/admin/surveys"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                  >
+                    <FileText className="w-4 h-4 mr-1.5" />
+                    Surveys
+                  </Link>
+                  <Link
+                    to="/admin/tasks"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                  >
+                    <ClipboardList className="w-4 h-4 mr-1.5" />
+                    Tasks
+                  </Link>
+                </>
               )}
 
               {user?.role?.name === 'ADMIN' && (
@@ -103,10 +112,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               )}
 
               {user?.role?.name === 'WORKER' && (
-                <span className="px-3 py-2 rounded-md text-sm font-medium text-slate-400 cursor-not-allowed flex items-center">
+                <Link
+                  to="/worker/tasks"
+                  className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                >
                   <ClipboardCheck className="w-4 h-4 mr-1.5" />
                   My Tasks
-                </span>
+                </Link>
               )}
             </nav>
 

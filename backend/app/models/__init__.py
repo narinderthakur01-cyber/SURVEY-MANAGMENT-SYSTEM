@@ -13,6 +13,14 @@ from app.models.survey import (
     QuestionType,
     SurveyVersionStatus,
 )
+from app.models.task import (
+    Task,
+    TaskAssignment,
+    TaskAssistanceRequest,
+    TaskIssue,
+    TaskStatus,
+    TaskPriority,
+)
 
 __all__ = [
     "Role",
@@ -28,4 +36,10 @@ __all__ = [
     "SurveyPublicLink",
     "QuestionType",
     "SurveyVersionStatus",
+    "Task",
+    "TaskAssignment",
+    "TaskAssistanceRequest",
+    "TaskIssue",
+    "TaskStatus",
+    "TaskPriority",
 ]
