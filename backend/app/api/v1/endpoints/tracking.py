@@ -73,6 +73,7 @@ def get_live_workforce_locations(
 
 
 @router.get("/workers/{worker_id}/history", response_model=list[WorkerLocationRead])
+@router.get("/history/worker/{worker_id}", response_model=list[WorkerLocationRead])
 def get_worker_location_history(
     worker_id: uuid.UUID,
     current_user: Annotated[User, Depends(get_current_user)],
@@ -116,6 +117,7 @@ def get_session_details(
 
 
 @router.post("/retention/cleanup")
+@router.post("/prune")
 def cleanup_retention_locations(
     _: Annotated[User, Depends(require_admin)],
     db: Annotated[Session, Depends(get_db)],

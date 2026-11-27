@@ -28,6 +28,26 @@ export interface TokenResponse {
   user: User;
 }
 
+export interface TeamMember {
+  id: string;
+  team_id: string;
+  user_id: string;
+  joined_at: string;
+  user?: User;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  description: string | null;
+  supervisor_id: string | null;
+  supervisor?: User | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  members: TeamMember[];
+}
+
 export interface ApiError {
   detail: string | { msg: string; type: string }[];
 }

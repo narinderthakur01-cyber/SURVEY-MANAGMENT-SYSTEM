@@ -100,14 +100,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
               {user?.role?.name === 'ADMIN' && (
                 <>
-                  <span className="px-3 py-2 rounded-md text-sm font-medium text-slate-400 cursor-not-allowed flex items-center">
+                  <Link
+                    to="/admin"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                  >
                     <Users className="w-4 h-4 mr-1.5" />
                     Users
-                  </span>
-                  <span className="px-3 py-2 rounded-md text-sm font-medium text-slate-400 cursor-not-allowed flex items-center">
+                  </Link>
+                  <Link
+                    to="/admin"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-colors flex items-center"
+                  >
                     <Shield className="w-4 h-4 mr-1.5" />
                     Teams
-                  </span>
+                  </Link>
                 </>
               )}
 
